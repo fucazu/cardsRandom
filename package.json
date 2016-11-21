@@ -5,6 +5,10 @@
   "main": "index.js",
   "author": "Rafael Sanches <fucazu@gmail.com>",
   "license": "MIT",
+  "scripts": {
+      "start": "node index",
+      "dev": "nodemon index"
+  },
   "dependencies": {
     "eslint": "^3.10.2",
     "express": "^4.14.0",
