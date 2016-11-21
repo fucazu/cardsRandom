@@ -1,0 +1,9 @@
+<h1>Batata Rules</h1>
+{{#each users}}
+<ul style="display: inline-block;">
+    {{name}}
+    {{#each cards}}
+        <li><a href="{{ enviarCarta value }}">{{convert suit}} {{value}}</a></li>
+    {{/each}}
+</ul>
+{{/each}}
