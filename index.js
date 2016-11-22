@@ -1,8 +1,8 @@
-const express = require('express')
-const app = express()
-const game = require('./game')()
-const Handlebars = require('handlebars')
-var cardsReq = require('./cards')()
+const express = require('express'),
+  app = express(),
+  game = require('./game'),
+  Handlebars = require('handlebars'),
+  cardsReq = require('./cards')
 
 const exphbs = require('express-handlebars')
 
@@ -26,10 +26,6 @@ const hbs = exphbs.create({
           break
       }
       return su
-    },
-    executar: function (fn) {
-      return new Handlebars.SafeString('(' +
-        fn.toString().replace(/\"/g, "'") + ')()')
     }
   }
 })
@@ -54,37 +50,15 @@ let user4 = {
   cards: []
 }
 var users = [user, user2, user3, user4]
-app.get('/a', function (req, res) {
-  console.log('user: ', user.cards)
-  game.newGame(4).then(function (resultado) {
-    console.log('resultado: ', resultado)
-    res.render('home', {
-      users: resultado
-    })
-  })
-})
 
 app.get('/', function (req, res) {
-  //   var cards = cardsReq.getAllCards().slice()
-
-  //   for (var i = 0; i < 3; i++) {
-  //     user.cards.push(cards.splice(Math.floor(Math.random() * cards.length), 1)[0])
-  //     user2.cards.push(cards.splice(Math.floor(Math.random() * cards.length), 1)[0])
-  //     user3.cards.push(cards.splice(Math.floor(Math.random() * cards.length), 1)[0])
-  //     user4.cards.push(cards.splice(Math.floor(Math.random() * cards.length), 1)[0])
-
-  //     if (i === 2) {
   game.newGame(4).then(function (resultado) {
-    console.log('resultado: ', resultado)
-    res.json({
-      users: resultado
-    // restante: cards,
-    // qtde: cards.length
+    game.filterCards(resultado).then(function () {
+      res.render('home', {
+        users: resultado
+      })
     })
   })
-//     }
-//   }
-//   })
 })
 
 app.listen(3000, function () {
