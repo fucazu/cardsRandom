@@ -27,4 +27,7 @@ exports.filterCards = function (users) {
   })
 }
 
+exports.createGame = function (username, socketId) {
+
+}
 
